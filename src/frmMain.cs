@@ -19,7 +19,7 @@ namespace LOIC
 	public partial class frmMain : Form
 	{
 		const string AttackText = "IMMA CHARGIN MAH LAZER";
-		const string StpFldText = "Stop flooding";
+		const string StpFldText = "停止攻击";
 
 		private List<IFlooder> arr = new List<IFlooder>();
 		private StringCollection aUpOLSites = new StringCollection();
@@ -99,17 +99,17 @@ namespace LOIC
 					if(tShowStats.Enabled) tShowStats.Stop();
 
 					if (!Functions.ParseInt(txtPort.Text, 0, 65535, out iPort)) {
-						Wtf ("I don't think ports are supposed to be written like THAT.", silent);
+						Wtf ("你家端口是这么写的？", silent);
 						return;
 					}
 					if (!Functions.ParseInt(txtThreads.Text, 1, (bKonami ? 1337 : 99), out iThreads)) {
-						Wtf ("What on earth made you put THAT in the threads field?", silent);
+						Wtf ("你为什么把它放在线程字段里?", silent);
 						return;
 					}
 
 					sTargetIP = txtTarget.Text;
 					if (String.IsNullOrEmpty(sTargetIP) || String.IsNullOrEmpty(sTargetHost) || String.Equals(sTargetIP, "N O N E !"))
-						throw new Exception("Select a target.");
+						throw new Exception("请先选择一个目标");
 
 					sMethod = cbMethod.Text;
 					protocol = Protocol.None;
@@ -118,7 +118,7 @@ namespace LOIC
 						// Analysis disable once EmptyGeneralCatchClause
 					} catch { }
 					if(protocol == Protocol.None) {
-						Wtf ("Select a proper attack method.", silent);
+						Wtf ("请选择合适的攻击方法", silent);
 						return;
 					}
 
@@ -149,7 +149,7 @@ namespace LOIC
 					if (protocol == Protocol.slowLOIC || protocol == Protocol.ReCoil || protocol == Protocol.ICMP)
 					{
 						if (!int.TryParse(txtSLSpT.Text, out iSockspThread) || iSockspThread < 1)
-							throw new Exception("A number is fine too!");
+							throw new Exception("一个数字也阔以!");
 					}
 				}
 				catch (Exception ex)
@@ -245,7 +245,7 @@ namespace LOIC
 			}
 
 			new frmWtf().Show();
-			MessageBox.Show(message, "What the shit.");
+			MessageBox.Show(message, "什么鬼东西");
 		}
 
 		/// <summary>
@@ -259,7 +259,7 @@ namespace LOIC
 				string tIP = txtTargetIP.Text.Trim().ToLowerInvariant();
 				if(tIP.Length == 0)
 				{
-					Wtf ("I think you forgot the IP.", silent);
+					Wtf ("我想你是忘记了IP。", silent);
 					return;
 				}
 				try
@@ -272,7 +272,7 @@ namespace LOIC
 				}
 				catch(FormatException)
 				{
-					Wtf ("I don't think an IP is supposed to be written like THAT.", silent);
+					Wtf ("我不认为IP应该这样写。", silent);
 					return;
 				}
 			}
@@ -802,7 +802,7 @@ namespace LOIC
 		private void frmMain_Load(object sender, EventArgs e)
 		{
 			string unlocked = bKonami ? " | *UNLEASHED*" : "";
-			this.Text = String.Format("{0} | When harpoons, air strikes and nukes fail | v. {1}{2}", Application.ProductName, Application.ProductVersion, unlocked);
+			this.Text = String.Format("{0} | 当三叉戟、空袭和核武器失效时 - Hcat 世界核平 v.{1}{2}", Application.ProductName, Application.ProductVersion, unlocked);
 		}
 
 		/// <summary>
@@ -1065,7 +1065,7 @@ namespace LOIC
 		/// <param name="e">EventArgs.</param>
 		private void label24_Click(object sender, EventArgs e)
 		{
-			Process.Start("https://github.com/NewEraCracker/LOIC");
+			Process.Start("https://github.com/AdminHcat/LOIC-X");
 		}
 
 		/// <summary>
